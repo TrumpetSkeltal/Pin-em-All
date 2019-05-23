@@ -6,20 +6,20 @@
 // Then we update their pinned status using tabs API once again
 
 function pinAllTabs() {
-    chrome.tabs.query({}, function(tabs) {
+    chrome.tabs.query({ windowId:chrome.windows.WINDOW_ID_CURRENT }, function(tabs) {
         for (var tab of tabs) {
             chrome.tabs.update(tab.id, { pinned: true });
         }
     });
 }
 
-    function unpinAllTabs() {
-        chrome.tabs.query({}, function(tabs) {
-            for (var tab of tabs) {
-                chrome.tabs.update(tab.id, { pinned: false });
-            }
-        });
-    }
+function unpinAllTabs() {
+    chrome.tabs.query({ windowId: chrome.windows.WINDOW_ID_CURRENT }, function(tabs) {
+        for (var tab of tabs) {
+            chrome.tabs.update(tab.id, { pinned: false });
+        }
+    });
+}
 
 // Used in popup menu in buttons clickable by the user
 window.onload = function() {
